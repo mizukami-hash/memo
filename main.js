@@ -2,7 +2,7 @@
 
 {
   const text = document.querySelector("#text");
-//   const container = document.querySelector("#container");
+  //   const container = document.querySelector("#container");
   const message = document.querySelector("#message");
   const save = document.querySelector("#save");
   const clear = document.querySelector("#clear");
@@ -16,13 +16,30 @@
     text.value = localStorage.getItem("memo");
   }
 
-  // 保存しましたボタンがふわっと出てくるやつ
+  // 保存ボタンをクリック
   save.addEventListener("click", () => {
+    // 保存しましたメッセージのcssスタイル追加
     message.classList.add("appear");
     setTimeout(() => {
       message.classList.remove("appear");
     }, 1000);
 
+    // 保存ボタン押したら現在日時を表示
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const hour = date.getHours();
+    const minute = date.getMinutes();
+
+    const week = date.getDay();
+    const weekItems = ["日", "月", "火", "水", "木", "金", "土"];
+    const dayOfWeek = weekItems[week];
+
+    const current = document.querySelector("#current");
+    current.innerHTML = `最終更新：${year}年${month}月${day}日${dayOfWeek}曜日${hour}時${minute}分`;
+
+    // 保存ボタン押したらローカルストレージにデータを保存
     localStorage.setItem("memo", text.value);
   });
 
@@ -33,8 +50,8 @@
     }
   });
 
-//   ここまでで基本機能はOK
-//      ↓  複数要素の追加ここから
+  //   ここまでで基本機能はOK
+  //      ↓  複数要素の追加ここから
 
   // addボタンで追加したい要素を格納(失敗メモ：後で考える)
   // const items ={};
@@ -91,6 +108,22 @@
         newMessage.classList.remove("appear");
       }, 1000);
 
+      // 日付を表示
+      const date = new Date();
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+      const hour = date.getHours();
+      const minute = date.getMinutes();
+
+      const week = date.getDay();
+      const weekItems = ["日", "月", "火", "水", "木", "金", "土"];
+      const dayOfWeek = weekItems[week];
+
+      const newCurrent = document.createElement("p");
+      newDiv.appendChild(newCurrent);
+      newCurrent.innerHTML = `最終更新：${year}年${month}月${day}日${dayOfWeek}曜日${hour}時${minute}分`;
+
       // ローカルストレージには新しいテキストエリアの入力内容をmemoというキーとセットにして格納
       localStorage.setItem("memo", newText.value);
     });
@@ -98,8 +131,8 @@
 
     // 作成した削除ボタンを押したとき＝＝＝＝＝＝＝＝＝＝＝＝＝＝
     newClearBtn.addEventListener("click", () => {
-    //  削除しますかのメッセージをクリックしたら
-        if (confirm("このページを削除しますか") === true) {
+      //  削除しますかのメッセージをクリックしたら
+      if (confirm("このページを削除しますか") === true) {
         // ローカルストレージを削除してテキストエリアを空文字に
         localStorage.removeItem("memo");
         newDiv.remove();
@@ -113,28 +146,11 @@
   });
 }
 
-// ここまでで複数要素の追加は一旦OK 
+// ここまでで複数ページの追加は一旦OK
 // ストレージのキーが一種類のため、それぞれ変えたほうが良いのか確認すること
 // 一つ目の内容を保存すると、保存した内容をコピーして次のメモ帳が作られる
 //   →多分ローカルストレージのキーから引っ張ってきちゃっている
-// リロードしたらメモ消える
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// リロードしたらメモ消える問題
 
 /*add イベントリスナー*/
 
