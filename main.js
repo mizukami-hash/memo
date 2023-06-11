@@ -1,3 +1,4 @@
+
 "use strict";
 
 {
@@ -22,10 +23,10 @@
   const dayOfWeek = weekItems[week];
 
   // メモというキーで取得したとき、値になるものがなければ空文字を代入してなんか書いてあったらその文字を値に設定
-  if (localStorage.getItem(localStorage.length.toString()) === null) {
+  if (localStorage.getItem('key') === null) {
     text.value = "";
   } else {
-    text.value = localStorage.getItem(localStorage.length.toString());
+    text.value = localStorage.getItem('key');
   }
 
   // 保存ボタンをクリック
@@ -40,33 +41,28 @@
     current.innerHTML = `最終更新：${year}年${month}月${day}日${dayOfWeek}曜日${hour}時${minute}分`;
 
     // 保存ボタン押したらローカルストレージにデータを保存
-    localStorage.setItem(localStorage.length.toString(), text.value);
+    localStorage.setItem('key', text.value);
   });
 
   clear.addEventListener("click", () => {
     if (confirm("削除しますか") === true) {
-      localStorage.removeItem(localStorage.length.toString());
+      localStorage.removeItem('key');
       text.value = "";
     }
   });
 
-  //   ここまでで基本機能はOK
-  //      ↓  複数要素の追加ここから
 
   const newCurrent = document.createElement("p");
   function addElement() {
-    // 新しいノートの要素を作成
-    // 入れ物としてのdivを作成
     const newDiv = document.createElement("div");
     // テキストエリア
     const newText = document.createElement("textarea");
-    // newText.textContent='';　きかない
     // テキストエリアにCSSの適用
     newText.classList.add("new-textarea");
     // divに格納
     newDiv.appendChild(newText);
 
-    // spanと保存しましたメッセージの作成
+    // span
     const newMessage = document.createElement("span");
     newMessage.textContent = "保存しました";
     // 新しい保存ボタンの生成
@@ -86,12 +82,10 @@
     newDiv.classList.add("container");
     newText.classList.add("textarea");
 
-    // テキストエリアの情報が未入力だったらmemo：空文字
-    // 入力してあったらmemo：入力内容で情報を取得
-    if (localStorage.getItem(localStorage.length.toString()) === null) {
+    if (localStorage.getItem('key') === null) {
       newText.value = "";
     } else {
-      newText.value = localStorage.getItem(localStorage.length.toString());
+      newText.value = localStorage.getItem('key');
     }
 
     // 作成した保存ボタンを押したとき＝＝＝＝＝＝＝＝＝＝＝＝
@@ -108,17 +102,17 @@
       newDiv.insertBefore(newCurrent, newMessage);
       newCurrent.innerHTML = `最終更新：${year}年${month}月${day}日${dayOfWeek}曜日${hour}時${minute}分`;
 
-      // ローカルストレージには新しいテキストエリアの入力内容をmemoというキーとセットにして格納
-      localStorage.setItem(localStorage.length.toString(), newText.value);
+      
+      localStorage.setItem('key', newText.value);
     });
     // ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
     // 作成した削除ボタンを押したとき＝＝＝＝＝＝＝＝＝＝＝＝＝＝
     newClearBtn.addEventListener("click", () => {
-      //  削除しますかのメッセージをクリックしたら
+      //  削除しますかのメッセージをクリック
       if (confirm("このページを削除しますか") === true) {
         // ローカルストレージを削除してテキストエリアを空文字に
-        localStorage.removeItem(localStorage.length.toString());
+        localStorage.removeItem('key');
         newDiv.remove();
       }
     });
@@ -129,24 +123,3 @@
     addElement();
   });
 }
-
-// ここまでで複数ページの追加は一旦OK
-// ストレージのキーが一種類のため、それぞれ変えたほうが良いのか確認すること
-// 一つ目の内容を保存すると、保存した内容をコピーして次のメモ帳が作られる問題
-//   →多分ローカルストレージのキーから引っ張ってきちゃっている
-// リロードしたらメモ消える問題
-// →これもキーを指定してローカルストレージに保存？
-
-// ↓見返し用メモ
-
-// あったらいい機能
-
-// メモを書ける　OK
-// 書いた内容を保存出来る　　OK
-// 保存した内容をいつでも呼び出せる
-// 書いたメモを検索で出来る
-// メモのカテゴリー化
-// メモの共有化　今度
-// 文字数カウント
-
-//
