@@ -47,7 +47,7 @@
   // for ofでlistItemsをひとつずつ取り出して、itemという定数に入れて繰り返しをする処理
   for (const item of listItems) {
     text.value = item.content;
-    // console.log(item);
+    console.log(item);
   }
 
   clear.addEventListener('click',()=>{
