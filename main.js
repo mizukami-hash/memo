@@ -50,10 +50,10 @@
     console.log(item);
   }
 
-  clear.addEventListener('click',()=>{
-    storage.removeItem('data');
-    text.value='';
-  })
+  clear.addEventListener("click", () => {
+    storage.removeItem("data");
+    text.value = "";
+  });
 
   // 日時の取得===========================================
   function getDate() {
