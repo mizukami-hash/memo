@@ -3,6 +3,8 @@
 
 "use strict";
 {
+
+
   let text = document.querySelector("#text");
   const container = document.querySelector("#container");
   const message = document.querySelector("#message");
@@ -12,10 +14,13 @@
   const wrapper = document.querySelector(".wrapper");
   const current = document.querySelector("#current");
 
+
+
   // ここにオブジェクトを追加していく
   let listItems = [];
+  let newList;
   let storage = localStorage;
-
+ 
   // saveボタン==============================================
   save.addEventListener("click", () => {
     if (text.value !== "") {
@@ -32,18 +37,18 @@
       storage.data = JSON.stringify(listItems);
       console.log(listItems);
       getDate();
-
-      // const json = storage.data; /*ローカルストレージのデータ*/
-      // if(json === undefined){
-      //   return;
-      // }
     }
   }); /*saveここまで*/
 
+  // add/メモの要素を作成する関数
+  // created save /保存指示をしたときにキーの名前を付けて保存する関数
+  // created clear /紙ごと削除
+  // 全体/getData
   const json = storage.data; /*ローカルストレージのデータ*/
   // リストの中にストレージのデータを格納
   listItems = JSON.parse(json); /*オブジェクトに戻す*/
   console.log(listItems);
+
   // for ofでlistItemsをひとつずつ取り出して、itemという定数に入れて繰り返しをする処理
   for (const item of listItems) {
     text.value = item.content;
@@ -61,16 +66,10 @@
     // console.log(date.getTime());
     current.textContent = date.toLocaleString();
   }
+
   // ユニークID============================================
   // let uniqueId =
   //   new Date().getTime().toString() + Math.floor(Math.random() * 10).toString();
-
-  // 保存データ===================================
-  // const memos = {
-  //   // id:1,
-  //   // body:'text1',
-  //   // updated:'...'
-  // };
 
   //  オブジェクトの中身を更新・保存する関数=====================
   //   function createNewStorageData() {
@@ -81,58 +80,94 @@
   //     memos.text = text.value;
   //     memos.updated = new Date().getTime();
 
-  //   }
-  //   // ローカルストレージに保存==============================
-  //   function setStorage(){
-  //     s.setItem('memo:'+uniqueId,JSON.stringify(listItems));
-  // }
+  // メモの要素を作る関数======================================
+  let createDiv;
+  let createSpan;
+  let createCurrent;
+  let createSaveBtn;
+  let createClearBtn;
+  let createText;
 
-  //   // ローカルストレージから取得==============================
-  //   function get(){
-  //     s.getItem(memos.id,JSON.stringify(memos));
+// ここを各メモ帳の入力値が入るように変更=================
+  function createNewPaper() {
+    for(let i =0; i<8; i++){
+    newList=newList+c;
+    newList= [];
+    let example ={};
+    newList.push(JSON.stringify(example));
+ // ====================================================
+    createDiv = document.createElement("div");
+    createSpan = document.createElement("span");
+    createSaveBtn = document.createElement("button");
+    createClearBtn = document.createElement("button");
+    createCurrent = document.createElement("p");
+    createText = document.createElement("textarea");
 
-  //   }
+    wrapper.appendChild(createDiv);
+    createDiv.appendChild(createText);
+    createDiv.appendChild(createSpan);
+    createDiv.appendChild(createCurrent);
+    createDiv.appendChild(createClearBtn);
+    createDiv.appendChild(createSaveBtn);
+    let date = new Date();
+    createCurrent.textContent = date.toLocaleString();
+    createClearBtn.textContent = "削除";
+    createSaveBtn.textContent = "保存";
+    createSpan.textContent = "保存しました";
+    }
+  }
+  let c =1;
+
+  add.addEventListener("click", () => {
+    createNewPaper();
+    c++;
+    localStorage.setItem('data'+c,newList);
+  });
 }
 
-// メモの要素を作る関数======================================
-//   function newElement() {
-//     createDiv = document.createElement("div");
-//     const createSpan = document.createElement("span");
-//     createSaveBtn = document.createElement("button");
-//     const createClearBtn = document.createElement("button");
-//     const createCurrent = document.createElement("p");
-//     createText = document.createElement('textarea');
 
-//     wrapper.appendChild(createDiv);
-//     createDiv.appendChild(createText);
-//     createDiv.appendChild(createSpan);
-//     createDiv.appendChild(createCurrent);
-//     createDiv.appendChild(createClearBtn);
-//     createDiv.appendChild(createSaveBtn);
+// id名に１を足して保存する関数
+// for (let i=0; i<storage.length;i++){
+//   (function(){
+//     newSaveBtn.addEventListener('click',()=>{
+//       newId ='id'+i;
+//       console.log(newId);
+//       storage.setItem(newId);
 
-//     createSaveBtn.classList.add("button");
-//     createClearBtn.classList.add("button");
-//     createDiv.classList.add("container");
-//     createText.classList.add("textarea");
-//     createCurrent.textContent=getDate();
-// // CSS
-//     createText.classList.add("textarea");
-//     createSaveBtn.classList.add("button");
-//     createClearBtn.classList.add("button");
-//     createDiv.classList.add("container");
-//     createClearBtn.innerHTML = "削除";
-//     createSaveBtn.innerHTML = "保存";
+//     });
+//   })(i);
 
-//   createSaveBtn.addEventListener('click',()=>{
-//     createAddStorageData();
-//     get();
-//   })
 // }
+// 即時関数のひな型　(function(){処理})();
+    // createSaveBtn.addEventListener("click",()=>{
+    //   for(let i=0; i<storage.length;i++){
+    //     console.log( 'newId'+i);
+    //     let newId='newId'+i;
+    //   }
 
-// add.addEventListener('click',()=>{
-//   // メモの要旨を追加
-//   newElement();
-// });
+    //   if (createText.value !== "") {
+    //     // id、入力内容、更新日時を追加
+    //     const newItem = {
+    //       id:
+    //         new Date().getTime().toString() +
+    //         Math.floor(Math.random() * 10).toString(),
+    //       content: createText.value,
+    //       date: new Date(),
+    //     };
+    //     listItems2.push(newItem);
+    //     // ローカルストレージに[data]キーでlistItemsを格納(文字列)
+    //     storage.newId = JSON.stringify(listItems2);
+    //     // console.log(listItems);
+    //     getDate();
+      
+    // }
+  // })
+
+  
+
+
+
+
 
 // save.addEventListener("click", () => {
 //   createNewStorageData();
