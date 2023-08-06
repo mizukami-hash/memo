@@ -1,41 +1,52 @@
-
-
-body{
-    margin:0;
-    background:#009578;
+body {
+  margin: 0;
+  background: #e1e5e4;
 }
 
-#app{
-    display:grid;
-    grid-template-columns: repeat(auto-fill,200px);
-    padding:24px;
-    gap:24px;
+#app {
+  width: 700px;
+  margin: 0 auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 200px);
+  padding: 24px;
+  gap: 24px;
+}
+p {
+  margin: 0 0 0 3px;
+  padding: 0;
+  width: 200px;
+  font-size: 0.8rem;
 }
 
-.note{
-    height:200px;
-    width:200px;
-    box-sizing: border-box;
-    padding:16px;
-    border-radius: 10px;
-    box-shadow: 0 0 7px rgba(0,0,0,0.15);
-    resize:none;
-    font-family:sans-serif;
-    font-size:16px;
-    position:relative;
-}
-.add-note{
-    height:200px;
-    border:none;
-    outline:none;
-    background:rgba(0,0,0,0.1);
-    border-radius: 10px;
-    font-size:120px;
-    color: rgba(0,0,0,0.5);
-    cursor:pointer;
-    transition: background 0.2s;
-}
-.add-note:hover{
-    background:rgba(0.0.0.0.2);
+h1 {
+  text-align: center;
+  font-weight: normal;
 }
 
+.note {
+  font-family: "Kiwi Maru", serif;
+  font-family: "Sawarabi Gothic", sans-serif;
+  height: 200px;
+  width: 200px;
+  box-sizing: border-box;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.15);
+  resize: none;
+  font-size: 16px;
+  position: relative;
+}
+.add-note {
+  height: 200px;
+  border: none;
+  outline: none;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  font-size: 120px;
+  color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.add-note:hover {
+  background: rgba(0.2);
+}
